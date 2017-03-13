@@ -1,4 +1,5 @@
 *.net
 *.gml
 *.xml
+*.dtd
 .DS_Store
