@@ -2,7 +2,7 @@ from lxml import etree
 import networkx as nx
 
 source = 'dblp.xml'
-dtd = etree.DTD(file='dblp.dtd')
+dtd = etree.DTD(file='dblp.dtd') #need to change second line in dblp.xml
 
 author=[]
 G=nx.Graph()
@@ -27,5 +27,5 @@ for event, element in etree.iterparse(source, load_dtd=True):
         author.append(name)
     element.clear()
 
-nx.write_pajek(G, "dblp.net")
-#nx.write_gml(G, "dblp.gml")
+nx.write_pajek(G, "dblpAll.net")
+#nx.write_gml(G, "dblpAll.gml")

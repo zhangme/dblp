@@ -2,7 +2,7 @@ from lxml import etree
 import networkx as nx
 
 source = 'dblp.xml'
-dtd = etree.DTD(file='dblp.dtd')
+dtd = etree.DTD(file='dblp.dtd') #need to change second line in dblp.xml
 
 author=[]
 G=nx.Graph()
@@ -10,8 +10,8 @@ G=nx.Graph()
 for event, element in etree.iterparse(source, load_dtd=True):
     if 	element.getchildren() and element.tag!="dblp":
         if len(author)>1:
-            for item in author:
-                G.add_node(name)
+            for person in author:
+                G.add_node(person)
             for i in range(0,len(author)-1):
                 for j in range(i+1,len(author)):
                     p1,p2=author[i],author[j]
