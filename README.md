@@ -3,9 +3,9 @@ SI 608 Group Project
 ------
 
 ### team1
-Tricia Chua
-Xingchi Jin
-Jasmine Mou
+Tricia Chua,
+Xingchi Jin,
+Jasmine Mou,
 Meng Zhang
 
 ### Notes:

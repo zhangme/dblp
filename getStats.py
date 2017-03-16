@@ -2,12 +2,10 @@ import networkx as nx
 
 dblp = nx.read_pajek("dblp.net")
 
-print "nodes: ", dblp.number_of_nodes() #1808650
-print "edges: ", dblp.number_of_edges() #8509033
+#print "nodes: ", dblp.number_of_nodes() #1808650
+#print "edges: ", dblp.number_of_edges() #8509033
+#print "density: ", nx.density(dblp) #5.20237169758e-06
 
-# print "diameter", nx.diameter(dblp)
-# print "density: ", nx.density(dblp)
-#
 # #number of components
 # print nx.number_connected_components(dblp)
 # #largest component
