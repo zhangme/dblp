@@ -41,4 +41,4 @@ for event, element in etree.iterparse(source, load_dtd=True):
 
     element.clear()
 
- nx.write_pajek(G, "dblp.net")
+nx.write_pajek(G, "dblp.net")
