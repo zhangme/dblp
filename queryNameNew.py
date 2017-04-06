@@ -9,7 +9,7 @@ title=[]
 G=nx.Graph()
 
 for event, element in etree.iterparse(source, load_dtd=True):
-    if 	element.getchildren() and element.tag!="dblp":
+    if 	element.getchildren() and element.tag!="dblp" and element.tag!="www":
         if len(author)>1:
             for person in author:
                 if G.has_node(person):
@@ -37,7 +37,7 @@ for event, element in etree.iterparse(source, load_dtd=True):
             name="\""+name+"\""
         author.append(name)
     if element.tag=="title" or element.tag=="booktitle" or element.tag=="journal":
-        title.append(element.text)
+        title.append(element.text.replace("\"","").replace("\'",""))
 
     element.clear()
 
