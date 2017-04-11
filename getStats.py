@@ -16,6 +16,9 @@ lc = nx.read_pajek("lc.net")
 
 #######################Extra###############################
 
+# print "diameter",nx.diameter(lc)
+# print "average shortest path",nx.average_shortest_path_length(lc)
+
 # print "degree_centrality: ", nx.degree_centrality(dblp)
 # print "closeness_centrality: ", nx.closeness_centrality(dblp)
 # print "betweenness_centrality: ", nx.closeness_centrality(dblp)
