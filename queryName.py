@@ -45,3 +45,7 @@ nx.write_pajek(G, "dblp.net")
 
 lc = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)[0]
 nx.write_pajek(lc, "lc.net")
+
+
+
+#G.nodes().index(node_name)
