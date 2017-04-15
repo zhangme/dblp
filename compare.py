@@ -17,7 +17,7 @@ def get_jaccard_coefficient(graph,node1,node2):
 def get_shortest_path(graph,node1,node2):
     return nx.shortest_path_length(graph,node1,node2)
 
-name_list = ["Li Li"]
+name_list = ["Lei Wang","Lei Zhang","Li Li","Ming Li","Wei Li","Wei Wang","Wei Zhang","Yang Liu","Yu Wang","Zhi Li"]
 for name in name_list:
     graph = nx.read_pajek(name+".net")
     graph = multigraph2graph(graph)
@@ -31,7 +31,7 @@ for name in name_list:
             if (name1 == name or name1[:-5].strip() == name) and (name2 == name or name2[:-5].strip() == name):
                 line = name1+","+name2+",F,"
                 if nx.has_path(graph,name1,name2):
-                    line = line + str(get_jaccard_coefficient(graph,name1,name2)) + "," + str(get_shortest_path(graph,name1,name2))+",F"
+                    line = line + str(get_jaccard_coefficient(graph,name1,name2)) + "," + str(get_shortest_path(graph,name1,name2))+",T"
                 else:
                     line = line+",,F"
                 f.write(line+"\n")
