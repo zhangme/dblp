@@ -2,4 +2,5 @@
 *.gml
 *.xml
 *.dtd
+*.csv
 .DS_Store
