@@ -12,5 +12,7 @@ def get_shortest_path(graph,node1,node2):
 
 for node in graph:
     if node[-4:].isdigit() and node[:-5] == name:
-        print get_jaccard_coefficient(graph,name,node)
-        print get_shortest_path(graph,name,node)
+        print name,node
+        print "Jaccard coef: ",get_jaccard_coefficient(graph,name,node)
+        print "Shortest path: ",get_shortest_path(graph,name,node)
+        print "---------------------------"
