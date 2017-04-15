@@ -6,7 +6,7 @@ similar_names = {}
 all_nodes = lc.nodes()
 for node in all_nodes:
     if node[-4:].isdigit() and len(node)>4:
-        name = node[:-5]
+        name = node[:-5].strip()
         if name in all_nodes:
             if name in similar_names:
                 similar_names[name][node] = all_nodes.index(node)
