@@ -11,17 +11,11 @@ def multigraph2graph(graph):
     return G
 
 def get_jaccard_coefficient(graph,node1,node2):
-    if nx.has_path(graph,node1,node2):
-        preds = nx.jaccard_coefficient(graph, [(node1, node2)])
-        return list(preds)[0][2]
-    else:
-        return "nodes not connected"
+    preds = nx.jaccard_coefficient(graph, [(node1, node2)])
+    return list(preds)[0][2]
 
 def get_shortest_path(graph,node1,node2):
-    if nx.has_path(graph,node1,node2):
-        return nx.shortest_path_length(graph,node1,node2)
-    else:
-        return "nodes not connected"
+    return nx.shortest_path_length(graph,node1,node2)
 
 
 name = "Li Li"
