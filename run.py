@@ -1,16 +1,6 @@
 from lxml import etree
 import networkx as nx
 
-def multigraph2graph(graph):
-    G = nx.Graph()
-    for u,v,data in graph.edges_iter(data=True):
-        w = data['weight'] if 'weight' in data else 1.0
-        if G.has_edge(u,v):
-            continue
-        else:
-            G.add_edge(u, v, weight=w)
-    return G
-
 source = 'dblp.xml'
 dtd = etree.DTD(file='dblp.dtd') #need to change second line in dblp.xml
 
@@ -69,20 +59,19 @@ for node in all_nodes:
 count_list = (len(key) for key in similar_names.values())
 top_10 = sorted(count_list,reverse=True)[9]
 selection = [key for key,value in similar_names.items() if len(value) >= top_10]
-print "number of similar names: ",len(similar_names.keys())
-print "highest count: ",max(count_list)
+print "number of similar names: ",len(similar_names.keys()) #1397
+print "highest count: ",max(len(key) for key in similar_names.values()) #57
 
 for case in selection:
     graph = nx.ego_graph(lc,case)
     for pair in similar_names[case]:
         subgraph = nx.ego_graph(lc,pair)
         graph = nx.compose(graph,subgraph)
-    graph = multigraph2graph(graph)
     nx.write_pajek(graph, str(case)+".net")
 
-print "number of components: ", nx.number_connected_components(G) #150540
-print "nodes: ", lc.number_of_nodes() #1665423
-print "edges: ", lc.number_of_edges() #8515446
-print "density: ", nx.density(lc) #6.14028514397e-06
-print "average degree: ",sum(lc.degree().values())/float(len(lc)) #10.226165965
-print "percent to whole graph",float(nx.number_of_nodes(lc))/nx.number_of_nodes(G) #0.866070815678
+print "number of components: ", nx.number_connected_components(G) #121476
+print "nodes: ", lc.number_of_nodes() #1329526
+print "edges: ", lc.number_of_edges() #6224694
+print "density: ", nx.density(lc) #7.04295088224e-06
+print "average degree: ",sum(lc.degree().values())/float(len(lc)) #9.36377927171
+print "percent to whole graph",float(nx.number_of_nodes(lc))/nx.number_of_nodes(G) #0.857090731868

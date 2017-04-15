@@ -1,15 +1,5 @@
 import networkx as nx
 
-def multigraph2graph(graph):
-    G = nx.Graph()
-    for u,v,data in graph.edges_iter(data=True):
-        w = data['weight'] if 'weight' in data else 1.0
-        if G.has_edge(u,v):
-            continue
-        else:
-            G.add_edge(u, v, weight=w)
-    return G
-
 lc = nx.read_pajek("lc.net")
 
 similar_names = {}
@@ -33,5 +23,4 @@ for case in selection:
     for pair in similar_names[case]:
         subgraph = nx.ego_graph(lc,pair)
         graph = nx.compose(graph,subgraph)
-    graph = multigraph2graph(graph)
     nx.write_pajek(graph, str(case)+".net")

@@ -2,15 +2,15 @@ import networkx as nx
 
 dblp = nx.read_pajek("dblp.net")
 
-# print "number of components: ", nx.number_connected_components(G) #150540
+# print "number of components: ", nx.number_connected_components(G) #121476
 
 lc = nx.read_pajek("lc.net")
 
-# print "nodes: ", lc.number_of_nodes() #1665423
-# print "edges: ", lc.number_of_edges() #8515446
-# print "density: ", nx.density(lc) #6.14028514397e-06
-# print "average degree: ",sum(lc.degree().values())/float(len(lc)) #10.226165965
-# print "percent to whole graph",float(nx.number_of_nodes(lc))/nx.number_of_nodes(dblp) #0.866070815678
+# print "nodes: ", lc.number_of_nodes() #1329526
+# print "edges: ", lc.number_of_edges() #6224694
+# print "density: ", nx.density(lc) #7.04295088224e-06
+# print "average degree: ",sum(lc.degree().values())/float(len(lc)) #9.36377927171
+# print "percent to whole graph",float(nx.number_of_nodes(lc))/nx.number_of_nodes(G) #0.857090731868
 
 
 
