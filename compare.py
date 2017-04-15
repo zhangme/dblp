@@ -28,12 +28,16 @@ name = "Li Li"
 graph = nx.read_pajek(name+".net")
 graph = multigraph2graph(graph)
 
-for node in graph:
-    if node[-4:].isdigit() and node[:-5].strip() == name:
-        print name,node
-        if nx.has_path(graph,node,name):
-            print "Jaccard coef: ",get_jaccard_coefficient(graph,name,node)
-            print "Shortest path: ",get_shortest_path(graph,name,node)
-        else:
-            print "not connected"
-        print "---------------------------"
+nodes = graph.nodes()
+for i in range(0,len(graph)-1):
+    for j in range(i+1,len(graph)):
+        name1 = nodes[i]
+        name2 = nodes[j]
+        if (name1 == name or name1[:-5].strip() == name) and (name2 == name or name2[:-5].strip() == name):
+            print name1,name2
+            if nx.has_path(graph,name1,name2):
+                print "Jaccard coef: ",get_jaccard_coefficient(graph,name1,name2)
+                print "Shortest path: ",get_shortest_path(graph,name1,name2)
+            else:
+                print "not connected"
+            print "---------------------------"
