@@ -17,6 +17,12 @@ def get_jaccard_coefficient(graph,node1,node2):
 def get_shortest_path(graph,node1,node2):
     return nx.shortest_path_length(graph,node1,node2)
 
+def get_hitting_time(graph,node1,node2):
+    return True
+
+
+
+
 name_list = ["Lei Wang","Lei Zhang","Li Li","Ming Li","Wei Li","Wei Wang","Wei Zhang","Yang Liu","Yu Wang","Zhi Li"]
 for name in name_list:
     graph = nx.read_pajek(name+".net")

@@ -53,17 +53,14 @@ for node in all_nodes:
         name = node[:-5].strip()
         if name in all_nodes:
             if name in similar_names:
-                similar_names[name][node] = lc.node[node]["id"]
+                similar_names[name][node] = all_nodes.index(node)
             else:
-                similar_names[name] = {name:lc.node[name]["id"],node:lc.node[node]["id"]}
+                similar_names[name] = {name:all_nodes.index(name),node:all_nodes.index(node)}
 count_list = (len(key) for key in similar_names.values())
 top_10 = sorted(count_list,reverse=True)[9]
 selection = [key for key,value in similar_names.items() if len(value) >= top_10]
-print "number of similar names: ",len(similar_names.keys()) 
-c = (len(key) for key in similar_names.values())
-top = sorted(c,reverse=True)[:10]
-s = [(key,len(value)) for key,value in similar_names.items() if len(value) in top]
-print s
+print "number of similar names: ",len(similar_names.keys())
+print "highest count: ",max(len(key) for key in similar_names.values())
 
 for case in selection:
     graph = nx.ego_graph(lc,case)
