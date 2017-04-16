@@ -41,10 +41,10 @@ for event, element in etree.iterparse(source, load_dtd=True):
 
     element.clear()
 
-# nx.write_pajek(G, "dblp.net")
+nx.write_pajek(G, "dblp.net")
 
 lc = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)[0]
-# nx.write_pajek(lc, "lc.net")
+nx.write_pajek(lc, "lc.net")
 
 similar_names = {}
 all_nodes = lc.nodes()
@@ -53,16 +53,17 @@ for node in all_nodes:
         name = node[:-5].strip()
         if name in all_nodes:
             if name in similar_names:
-                similar_names[name][node] = graph.node[node]["id"]
+                similar_names[name][node] = lc.node[node]["id"]
             else:
-                similar_names[name] = {name:graph.node[name]["id"],node:graph.node[node]["id"]}
+                similar_names[name] = {name:lc.node[name]["id"],node:lc.node[node]["id"]}
 count_list = (len(key) for key in similar_names.values())
 top_10 = sorted(count_list,reverse=True)[9]
 selection = [key for key,value in similar_names.items() if len(value) >= top_10]
-print "number of similar names: ",len(similar_names.keys()) #1397
+print "number of similar names: ",len(similar_names.keys()) 
 c = (len(key) for key in similar_names.values())
 top = sorted(c,reverse=True)[:10]
 s = [(key,len(value)) for key,value in similar_names.items() if len(value) in top]
+print s
 
 for case in selection:
     graph = nx.ego_graph(lc,case)
