@@ -41,10 +41,10 @@ for event, element in etree.iterparse(source, load_dtd=True):
 
     element.clear()
 
-nx.write_pajek(G, "dblp.net")
+# nx.write_pajek(G, "dblp.net")
 
 lc = sorted(nx.connected_component_subgraphs(G), key = len, reverse=True)[0]
-nx.write_pajek(lc, "lc.net")
+# nx.write_pajek(lc, "lc.net")
 
 similar_names = {}
 all_nodes = lc.nodes()
@@ -53,14 +53,16 @@ for node in all_nodes:
         name = node[:-5].strip()
         if name in all_nodes:
             if name in similar_names:
-                similar_names[name][node] = all_nodes.index(node)
+                similar_names[name][node] = graph.node[node]["id"]
             else:
-                similar_names[name] = {name:all_nodes.index(name),node:all_nodes.index(node)}
+                similar_names[name] = {name:graph.node[name]["id"],node:graph.node[node]["id"]}
 count_list = (len(key) for key in similar_names.values())
 top_10 = sorted(count_list,reverse=True)[9]
 selection = [key for key,value in similar_names.items() if len(value) >= top_10]
 print "number of similar names: ",len(similar_names.keys()) #1397
-print "highest count: ",max(len(key) for key in similar_names.values()) #57
+c = (len(key) for key in similar_names.values())
+top = sorted(c,reverse=True)[:10]
+s = [(key,len(value)) for key,value in similar_names.items() if len(value) in top]
 
 for case in selection:
     graph = nx.ego_graph(lc,case)
@@ -68,10 +70,3 @@ for case in selection:
         subgraph = nx.ego_graph(lc,pair)
         graph = nx.compose(graph,subgraph)
     nx.write_pajek(graph, str(case)+".net")
-
-print "number of components: ", nx.number_connected_components(G) #121476
-print "nodes: ", lc.number_of_nodes() #1329526
-print "edges: ", lc.number_of_edges() #6224694
-print "density: ", nx.density(lc) #7.04295088224e-06
-print "average degree: ",sum(lc.degree().values())/float(len(lc)) #9.36377927171
-print "percent to whole graph",float(nx.number_of_nodes(lc))/nx.number_of_nodes(G) #0.857090731868
