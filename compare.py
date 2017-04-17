@@ -40,13 +40,15 @@ def get_hitting_time(graph,node1,node2):
         X.append(tar_val)
         B = dot(B,A)
         i+=1
+        if i>10000:
+            break
     Y = X[:]
     Y.append(Y[-1])
     Z = []
     for i in range(len(X)):
-        Z.append((Y[i+1]-X[i])*i)
+        Z.append((Y[i+1]-X[i])*(i+1))
     expectation = sum(Z)
-    return (round(expectation),i)
+    return round(expectation)
 
 name = "Li Li"
 graph = nx.read_pajek(name+".net")
