@@ -1,6 +1,7 @@
 from lxml import etree
 import networkx as nx
 
+
 source = 'dblp.xml'
 dtd = etree.DTD(file='dblp.dtd') #need to change second line in dblp.xml
 
